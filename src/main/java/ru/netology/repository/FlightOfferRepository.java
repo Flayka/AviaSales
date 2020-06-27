@@ -1,25 +1,25 @@
 package ru.netology.repository;
 
-import ru.netology.domain.Ticket;
+import ru.netology.domain.FlightOffer;
 
-public class TicketRepository {
-    private Ticket[] items = new Ticket[0];
+public class FlightOfferRepository {
+    private FlightOffer[] items = new FlightOffer[0];
 
-    public void save(Ticket item) {
+    public void save(FlightOffer item) {
         int length = items.length + 1;
-        Ticket[] tmp = new Ticket[length];
+        FlightOffer[] tmp = new FlightOffer[length];
         System.arraycopy(items, 0, tmp, 0, items.length);
         int lastIndex = tmp.length - 1;
         tmp[lastIndex] = item;
         items = tmp;
     }
 
-    public Ticket[] findAll() {
+    public FlightOffer[] findAll() {
         return items;
     }
 
-    public Ticket findById(int id) {
-        for (Ticket item : items) {
+    public FlightOffer findById(int id) {
+        for (FlightOffer item : items) {
             if (item.getId() == id) ;
             return item;
         }
@@ -28,12 +28,12 @@ public class TicketRepository {
 
     public void removeById(int id) {
         int length = items.length - 1;
-        Ticket[] tmp = new Ticket[length];
+        FlightOffer[] tmp = new FlightOffer[length];
         int index = 0;
-        for (Ticket item : items) {
+        for (FlightOffer item : items) {
             if (item.getId() != id) {
-            tmp[index] = item;
-            index++;
+                tmp[index] = item;
+                index++;
             }
         }
         items = tmp;
