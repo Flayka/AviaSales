@@ -13,9 +13,9 @@ class FlightOfferManagerTest {
     FlightOffer MoscowLondon = new FlightOffer(1, 14000, "SVO", "LHR", 240);
     FlightOffer MoscowParis = new FlightOffer(2, 17000, "SVO", "PAR", 235);
     FlightOffer MoscowParisSales = new FlightOffer(3, 12750, "SVO", "PAR", 240);
-    FlightOffer MoscowParisBusiness = new FlightOffer(4, 35000, "SVO", "PAR", 235);
-    FlightOffer MoscowPrague = new FlightOffer(5, 13000, "SVO", "PRG", 155);
-    FlightOffer MoscowPragueSales = new FlightOffer(6, 13000, "SVO", "PRG", 155);
+    FlightOffer MoscowParisBusiness = new FlightOffer(4, 38000, "SVO", "PAR", 235);
+    FlightOffer MoscowPrague = new FlightOffer(5, 11000, "SVO", "PRG", 155);
+    FlightOffer MoscowPragueSales = new FlightOffer(6, 11000, "SVO", "PRG", 155);
     FlightOffer MoscowBeijing = new FlightOffer(7, 30000, "SVO", "BJS", 430);
 
     @BeforeEach
