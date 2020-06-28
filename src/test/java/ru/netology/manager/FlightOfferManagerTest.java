@@ -1,22 +1,24 @@
-package ru.netology.ru.netology.manager;
+package ru.netology.manager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.domain.FlightOffer;
 import ru.netology.repository.FlightOfferRepository;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 class FlightOfferManagerTest {
     private FlightOfferRepository repository = new FlightOfferRepository();
     FlightOfferManager manager = new FlightOfferManager(repository);
-    FlightOffer MoscowLondon = new FlightOffer(1, 14000, "SVO", "LHR", 240);
-    FlightOffer MoscowParis = new FlightOffer(2, 17000, "SVO", "PAR", 235);
-    FlightOffer MoscowParisSales = new FlightOffer(3, 12750, "SVO", "PAR", 240);
-    FlightOffer MoscowParisBusiness = new FlightOffer(4, 38000, "SVO", "PAR", 235);
-    FlightOffer MoscowPrague = new FlightOffer(5, 11000, "SVO", "PRG", 155);
-    FlightOffer MoscowPragueSales = new FlightOffer(6, 11000, "SVO", "PRG", 155);
-    FlightOffer MoscowBeijing = new FlightOffer(7, 30000, "SVO", "BJS", 430);
+    private FlightOffer MoscowLondon = new FlightOffer(1, 14000, "SVO", "LHR", 243);
+    private FlightOffer MoscowParis = new FlightOffer(2, 17000, "SVO", "PAR", 235);
+    private FlightOffer MoscowParisSales = new FlightOffer(3, 12750, "SVO", "PAR", 240);
+    private FlightOffer MoscowParisBusiness = new FlightOffer(4, 35000, "SVO", "PAR", 237);
+    private FlightOffer MoscowPrague = new FlightOffer(5, 13000, "SVO", "PRG", 170);
+    private FlightOffer MoscowPragueSales = new FlightOffer(6, 13000, "SVO", "PRG", 155);
+    private FlightOffer MoscowBeijing = new FlightOffer(7, 30000, "SVO", "BJS", 430);
 
     @BeforeEach
     public void setUp() {
@@ -30,45 +32,42 @@ class FlightOfferManagerTest {
     }
 
     @Test
-    public void shouldSearchByIATA() {
-        String addDeparture = "SVO";
-        String addArrival = "LHR";
+    public void shouldFindAllAndSort() {
+        FlightOffer[] expected = new FlightOffer[]{MoscowParisSales, MoscowPrague, MoscowPragueSales, MoscowLondon, MoscowParis, MoscowBeijing, MoscowParisBusiness};
+        FlightOffer[] actual = repository.findAll();
+        Arrays.sort(actual);
 
-        FlightOffer[] actual = manager.findAll(addDeparture, addArrival);
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchByIATA() {
         FlightOffer[] expected = new FlightOffer[]{MoscowLondon};
+        FlightOffer[] actual = manager.findAll("SVO", "LHR");
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldSearchByIATAAndSort() {
-        String addDeparture = "SVO";
-        String addArrival = "PAR";
-
-        FlightOffer[] actual = manager.findAll(addDeparture, addArrival);
         FlightOffer[] expected = new FlightOffer[]{MoscowParisSales, MoscowParis, MoscowParisBusiness};
+        FlightOffer[] actual = manager.findAll("SVO", "PAR");
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldSearchByIATAAndSortSamePrice() {
-        String addDeparture = "SVO";
-        String addArrival = "PRG";
-
-        FlightOffer[] actual = manager.findAll(addDeparture, addArrival);
         FlightOffer[] expected = new FlightOffer[]{MoscowPrague, MoscowPragueSales};
+        FlightOffer[] actual = manager.findAll("SVO", "PRG");
 
         assertArrayEquals(expected, actual);
     }
 
     @Test
     public void shouldSearchByIATANotExist() {
-        String addDeparture = "BJS";
-        String addArrival = "SVO";
-
-        FlightOffer[] actual = manager.findAll(addDeparture, addArrival);
         FlightOffer[] expected = new FlightOffer[]{};
+        FlightOffer[] actual = manager.findAll("BJS", "SVO");
 
         assertArrayEquals(expected, actual);
     }
