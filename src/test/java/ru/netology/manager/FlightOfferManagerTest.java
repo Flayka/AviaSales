@@ -18,7 +18,7 @@ class FlightOfferManagerTest {
     private FlightOffer MoscowParisSale = new FlightOffer(3, 12750, "SVO", "PAR", 240);
     private FlightOffer MoscowParisPremium = new FlightOffer(4, 35000, "SVO", "PAR", 237);
     private FlightOffer MoscowPrague = new FlightOffer(5, 13000, "SVO", "PRG", 170);
-    private FlightOffer MoscowPragueSales = new FlightOffer(6, 13000, "SVO", "PRG", 155);
+    private FlightOffer MoscowPragueSale = new FlightOffer(6, 13000, "SVO", "PRG", 155);
     private FlightOffer MoscowBeijing = new FlightOffer(7, 30000, "SVO", "BJS", 430);
 
     @BeforeEach
@@ -28,13 +28,13 @@ class FlightOfferManagerTest {
         manager.add(MoscowParisSale);
         manager.add(MoscowParisPremium);
         manager.add(MoscowPrague);
-        manager.add(MoscowPragueSales);
+        manager.add(MoscowPragueSale);
         manager.add(MoscowBeijing);
     }
 
     @Test
     public void shouldNotSearchByIATAAndComparatorSort() {
-        FlightOffer[] expected = new FlightOffer[]{MoscowPragueSales, MoscowPrague};
+        FlightOffer[] expected = new FlightOffer[]{MoscowPragueSale, MoscowPrague};
         FlightOffer[] actual = manager.findAll("SVO", "PRG", new TravelTimeAscComparator());
 
         assertArrayEquals(expected, actual);
@@ -50,7 +50,7 @@ class FlightOfferManagerTest {
 
     @Test
     public void shouldFindAllAndSort() {
-        FlightOffer[] expected = new FlightOffer[]{MoscowParisSale, MoscowPrague, MoscowPragueSales, MoscowLondon, MoscowParis, MoscowBeijing, MoscowParisPremium};
+        FlightOffer[] expected = new FlightOffer[]{MoscowParisSale, MoscowPrague, MoscowPragueSale, MoscowLondon, MoscowParis, MoscowBeijing, MoscowParisPremium};
         FlightOffer[] actual = repository.findAll();
         Arrays.sort(actual);
 
@@ -67,7 +67,7 @@ class FlightOfferManagerTest {
 
     @Test
     public void shouldSearchByIATAAndSortSamePrice() {
-        FlightOffer[] expected = new FlightOffer[]{MoscowPrague, MoscowPragueSales};
+        FlightOffer[] expected = new FlightOffer[]{MoscowPrague, MoscowPragueSale};
         FlightOffer[] actual = manager.findAll("SVO", "PRG");
 
         assertArrayEquals(expected, actual);
