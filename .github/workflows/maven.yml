@@ -4,10 +4,11 @@
 name: Java CI with Maven
 
 on:
-  [push]
+  push:
+    branches: [ master, tickets, thefastest ]
 
   pull_request:
-    branches: [master]
+    branches: [ master ]
 
 jobs:
   build:
