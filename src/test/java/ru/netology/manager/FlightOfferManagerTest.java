@@ -15,7 +15,7 @@ class FlightOfferManagerTest {
     FlightOfferManager manager = new FlightOfferManager(repository);
     private FlightOffer MoscowLondon = new FlightOffer(1, 14000, "SVO", "LHR", 243);
     private FlightOffer MoscowParis = new FlightOffer(2, 17000, "SVO", "PAR", 235);
-    private FlightOffer MoscowParisSale = new FlightOffer(3, 12750, "SVO", "PAR", 240);
+    private FlightOffer MoscowParisSales = new FlightOffer(3, 12750, "SVO", "PAR", 240);
     private FlightOffer MoscowParisPremium = new FlightOffer(4, 35000, "SVO", "PAR", 237);
     private FlightOffer MoscowPrague = new FlightOffer(5, 13000, "SVO", "PRG", 170);
     private FlightOffer MoscowPragueSale = new FlightOffer(6, 13000, "SVO", "PRG", 155);
@@ -25,7 +25,7 @@ class FlightOfferManagerTest {
     public void setUp() {
         manager.add(MoscowLondon);
         manager.add(MoscowParis);
-        manager.add(MoscowParisSale);
+        manager.add(MoscowParisSales);
         manager.add(MoscowParisPremium);
         manager.add(MoscowPrague);
         manager.add(MoscowPragueSale);
@@ -50,7 +50,7 @@ class FlightOfferManagerTest {
 
     @Test
     public void shouldFindAllAndSort() {
-        FlightOffer[] expected = new FlightOffer[]{MoscowParisSale, MoscowPrague, MoscowPragueSale, MoscowLondon, MoscowParis, MoscowBeijing, MoscowParisPremium};
+        FlightOffer[] expected = new FlightOffer[]{MoscowParisSales, MoscowPrague, MoscowPragueSale, MoscowLondon, MoscowParis, MoscowBeijing, MoscowParisPremium};
         FlightOffer[] actual = repository.findAll();
         Arrays.sort(actual);
 
@@ -59,7 +59,7 @@ class FlightOfferManagerTest {
 
     @Test
     public void shouldSearchByIATAAndSort() {
-        FlightOffer[] expected = new FlightOffer[]{MoscowParisSale, MoscowParis, MoscowParisPremium};
+        FlightOffer[] expected = new FlightOffer[]{MoscowParisSales, MoscowParis, MoscowParisPremium};
         FlightOffer[] actual = manager.findAll("SVO", "PAR");
 
         assertArrayEquals(expected, actual);
